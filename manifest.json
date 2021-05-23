@@ -1,0 +1,46 @@
+{
+    "name": "Scribbeo",
+    "manifest_version": 2,
+    "version": "1.0",
+    "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCxGWIIBRUVzQIXITqE6+js1FA24fsZC58G0fxcO1Duwfps+9gip5tedTziErKEpeAQVkgasdT4kk+b6Lw27yp3oysAj6zD9j+j4W+EMArTXqMIc6SMYD7Z8bPcwPb3tC1MUxMSpO6oOVpFE23UhKe91SYnrK92nHI2cmsor5elXQIDAQAB",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*",
+                "http://www.youtube.com/*",
+                "<all_urls>"
+            ],
+            "js": ["content.js"]
+        }
+    ], 
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "oauth2":{
+        "client_id": "313984530579-mgkn38joen4u6r9d8b7uiia0h5sc4n2l.apps.googleusercontent.com",
+        "scopes":[
+            "https://www.googleapis.com/auth/contacts",
+            "https://www.googleapis.com/auth/drive.file",
+            "profile email"
+        ]
+    },
+
+    "content_security_policy": "script-src 'self' https://apis.google.com/js/platform.js; object-src 'self'",
+
+    "permissions": [
+        "tabs", 
+        "storage", 
+        "identity",
+        "identity.email",
+        "*://*.google.com/*"
+    ],    
+
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html",
+        "default_title": "Scribbeo popup!"
+    }
+}    

@@ -1,0 +1,44 @@
+body {
+    background-color: #DCF3E9;
+    height: 535px;
+    width: 400px;
+}
+
+.popup #heading {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 33px;
+    line-height: 40px;
+    text-align: center; 
+    top: 200px;
+    position: relative;
+}
+
+.popup button { 
+    position: relative;
+    top: 270px;
+    background-color: #108B7F;
+    border: none;
+    border-radius: 50px 50px 50px 50px;
+    width: 337px;
+    height: 67px;
+    left: 35px;
+    
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+    color: #FBF7F8;
+
+}
+
+.popup button:hover {
+    background-color:  #0e5c55;
+    cursor: pointer;
+}
+
