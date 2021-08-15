@@ -12,243 +12,145 @@ var nonce = encodeURIComponent(Math.random().toString(36).substring(2, 15) + Mat
 
 let auth_url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}&response_type=${resp_type}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&nonce=${nonce}&prompt=${prompt}`;
 
+// stores database as well 
+var users = [];
+// array that only stores user ids
+var usersNamesOnly = [];
 
-let user_signed_in = false;
+var userIdentity;
+var currUser;
 
-chrome.identity.onSignInChanged.addListener(function (account_id, signedIn) {
-    if (signedIn) {
-        user_signed_in = true;
-    } else {
-        user_signed_in = false;
-    }
-});
+chrome.runtime.onMessage.addListener( function (request, sender, sendResponse) {
+    if (request.userId) {
+        addUser(request.userId);
+        console.log("adding user");
 
-function is_user_signed_in() {
-    return user_signed_in;
-}
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === 'signin') {
-
-        if (is_user_signed_in()) {
-            // do nothing 
-            console.log("user signed in already");
-
-            chrome.browserAction.setPopup({ popup: 'popup-signedin.html'}, function() {});
-
-        } else {
-            // interactive true so that they can pick which account to sign in with
-            // launches the sign in page
-            chrome.identity.getAuthToken({ interactive: true }, function (token) {                
-                console.log(token);
-                // change the popup window
-                chrome.browserAction.setPopup({ popup: 'popup-signedin.html'}, function() {
-                    // send response back to popup.js that signed in successfully 
-                    chrome.runtime.sendMessage({
-                        msg: "signinsuccess"
-                    });
-                    // changes to signed in
-                    user_signed_in = true;
-                });
-            });
-            return true;
-        }    
-
-    } else if (request.message === 'signout') {
-        // change the popup window to original popup page
-        chrome.browserAction.setPopup({ popup: 'popup.html'}, function() {
-            // send response back to popup.js that signed out
-            chrome.runtime.sendMessage({
-                msg: "signoutsuccess"
-            });
-            // changes to signed out
-            user_signed_in = false;
-        });
-        return true;
-
-    } else if (request.message === 'isSignedIn') {
-
-        // send response back to popup.js that signed out
-        chrome.runtime.sendMessage({
-            msg: is_user_signed_in()
-        });
-
-    }    
-});      
-
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === 'REMOVING') {
+    } else if (request.addNewDoc) {
+        var boolValue = addNewDoc(request.addNewDoc);
+        sendResponse({haveDoc: boolValue});
+        console.log(" adding a new doc ");
     
-        console.log("REMOVING");
-
-        chrome.identity.launchWebAuthFlow(
-            {
-                url: auth_url, 
-                interactive: true}, 
-            
-            function(respUrl) { 
-                console.log(respUrl); 
-                console.log("logoutpage");
-
-                if (chrome.runtime.lastError) {
-                    console.log("closed the logout page");
-                }
-        });
-
+    } else if (request.displayDocs) {
+        var allDocs = displayDocs();
+        sendResponse({documents: allDocs});
+        console.log("displaying all docs " + allDocs);
+    
+    } else if (request.openOldDoc) {
+        var oldDoc = openOldDoc(request.openOldDoc);
+        sendResponse({doc: oldDoc});
+        console.log("opening old doc");
+    
+    } else if (request.addNote) {
+        addNewNote(request.addNote);
+    
+    } else if (request.displayNotes) {
+        var allNotes = displayNotes(request.displayNotes);
+        sendResponse({notes: allNotes});
     }
-});        
+    return true;
+});   
 
-
-
-        /*
-        chrome.identity.getAuthToken({ interactive: true }, function (token) {
-            let fetch_url = `https://people.googleapis.com/v1/contactGroups/all?maxMembers=20&key=${AIzaSyCEjl8mryu0brl7fFv5-NczaITfcK0k1aU}`;
-            let fetch_options = {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-
-            fetch(fetch_url, fetch_options)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.memberCount) {
-                        const members = res.memberResourceNames;
-                        fetch_url = `https://people.googleapis.com/v1/people:batchGet?personFields=names&key=${AIzaSyCEjl8mryu0brl7fFv5-NczaITfcK0k1aU}`;
-
-                        members.forEach(member => {
-                            fetch_url += `&resourceNames=${encodeURIComponent(member)}`;
-                        });
-
-                        fetch(fetch_url, fetch_options)
-                            .then(res => res.json())
-                            .then(res => console.log(res));
-                    }
-                });
-        });
-
-    } else if (request.message === 'create_contact') {
-        chrome.identity.getAuthToken({ interactive: true }, function (token) {
-            let fetch_url = `https://people.googleapis.com/v1/people:createContact?key=${AIzaSyCEjl8mryu0brl7fFv5-NczaITfcK0k1aU}`;
-
-            let fetch_options = {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    'names': [
-                        {
-                            "givenName": "Johnny",
-                            "familyName": "Silver"
-                        }
-                    ]
-                })
-            }
-
-            fetch(fetch_url, fetch_options)
-                .then(res => res.json())
-                .then(res => console.log(res));
-        });
-    } else if (request.message === 'delete_contact') {
-        chrome.identity.getAuthToken({ interactive: true }, function (token) {
-            let fetch_url = `https://people.googleapis.com/v1/contactGroups/all?maxMembers=20&key=${AIzaSyCEjl8mryu0brl7fFv5-NczaITfcK0k1aU}`;
-            let fetch_options = {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-
-            fetch(fetch_url, fetch_options)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.memberCount) {
-                        const members = res.memberResourceNames;
-
-                        fetch_options.method = 'DELETE';
-                        fetch_url = `https://people.googleapis.com/v1/${members[0]}:deleteContact?key=${AIzaSyCEjl8mryu0brl7fFv5-NczaITfcK0k1aU}`;
-
-                        fetch(fetch_url, fetch_options)
-                            .then(res => console.log(res));
-                    }
-                });
-        });
+function addUser(userId) {
+    
+    var userTemplate = {
+        userId: userIdentity,
+        // array of list of documents names
+        documents: [], 
+        // one array for each document to store key value pairs (time, notes)
+        documentsNotes: []
     }
-  });
-*/
-/*
 
-let user_signed_in = false;
+    // if array is empty initially, add first user
+    if (users.length === 0) {
+        userIdentity = userId;
+        userTemplate.userId = userIdentity;
+        users.push(userTemplate);
+        usersNamesOnly.push(userId);
+        currUser = userTemplate;
+        console.log("first user " + userIdentity + " " + users.length);
 
-const CLIENT_ID = encodeURIComponent('313984530579-68g0144s6js8lqcnf1j3v8cd045l6s5a.apps.googleusercontent.com');
-const RESPONSE_TYPE = encodeURIComponent('id_token');
-const REDIRECT_URI = encodeURIComponent('https://oedofflneggladijdnofdpoggpobmnac.chromiumapp.org/');
-const STATE = encodeURIComponent('meet' + Math.random().toString(36).substring(2, 15));
-const SCOPE = encodeURIComponent('openid');
-const PROMPT = encodeURIComponent('consent');
-
-function create_oauth2_url() {
-    let nonce = encodeURIComponent(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
-
-    let url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&state=${STATE}&nonce=${nonce}&prompt=${PROMPT}`;
-
-        return url;
-}
-
-function is_user_signed() {
-    return user_signed_in;
-}
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === 'login') {
-        if (is_user_signed()) {
-            console.log("user signed in");
-        } else {
-            chrome.identity.launchWebAuthFlow({
-                'url': create_oauth2_url(),
-                'interactive': true
-            }, function (redirect_url) {
-                console.log(redirect_url);
-                sendResponse('success');
-            });    
-            
-            return true;
+    } else {
+        // check if user already exists
+        for (i = 0; i < users.length; i++) { 
+            // if user exists, assign it as current user
+            if (usersNamesOnly.includes(userId)) {
+                var indexOfUser = usersNamesOnly.indexOf(userId);
+                var existingUser = users[indexOfUser];
+                currUser = existingUser;
+            } else {
+                // create new user if doesn't exist
+                userIdentity = userId;
+                userTemplate.userId = userIdentity;
+                users.push(userTemplate);
+                usersNamesOnly.push(userId);
+                currUser = userTemplate;
+                break;
+            }
         }
-    } else if (request.message === 'logout') {
-        return true;
-    } else if (request.message === 'isUserSignedIn') {
-        return true;
-    }    
-});
-
-
-
-
-
-
-
-
-
-
-// Add a listener for thebrowser action 
-// When user clicks button, triggers 'onClick' event
-// this code will go to background.js 
-chrome.browserAction.onClicked.addListener(buttonClicked);
-
-// the user has clicked the button 
-// 'tab' is an objects with infromation about current
-// opened tab 
-// We want to send a 'message' from the background script 
-// to the content script for content script to perform any action
-function buttonClicked(tab) {
-    let msg = {
-        txt: "hello"
-    };
-    chrome.tabs.sendMessage(tab.id, msg);
+    }
 }
 
-// scribbeoExt password
-// scribbeo.help@gmail.com
-*/
+function addNewDoc(fileName) {
+    // if another document with the same name exists
+    if (currUser.documents.includes(fileName)) {
+        console.log(fileName + " alr exists inside " + currUser.documents);
+        return true;
+    } else {
+        // add new document to list of documents
+        currUser.documents.push(fileName);
+        // add new array to indicate creation of document
+        // this array will contain pairs of key (time) and value (notes) 
+        // eg. [ [time, notes] , [time, notes] , [time, notes] ]
+        var newDocArray = [];
+        currUser.documentsNotes.push(newDocArray);
+        console.log(" my list of docs " + currUser.documents);
+        return false; 
+    }
+}
+
+function addNewNote(note) {
+    var time = note.time;
+    var notes = note.notes;
+    var docName = note.docname;
+    console.log("imt he doc name " + docName);
+    var index = currUser.documents.indexOf(docName);
+    console.log("index is " + index);
+    currUser.documentsNotes[index].push(note);
+    currUser.documentsNotes[index].sort(compareToSort);
+}
+
+
+function compareToSort(notes1, notes2) {
+    //Math.floor(timeStampURL.split('=')[1]
+    var time1 = Math.floor(notes1.time.split('=')[1]);
+    var time2 = Math.floor(notes2.time.split('=')[1]);
+    console.log("time1 is " + time1 + " and time2 is " + time2);
+    if (time1 < time2) {
+        return -1;
+    } else if (time1 > time2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+function displayNotes(docName) {
+    var index = currUser.documents.indexOf(docName);
+    var numOfNotes = currUser.documentsNotes[index];
+    
+    return numOfNotes;  
+   // [{time, note}, {time, note}, {time, note}]
+}
+
+function displayDocs() {
+    console.log("all docs " + currUser.documents);
+    return currUser.documents;
+}
+
+function openOldDoc(docName) {
+    var document;
+    document = currUser.documents.indexOf(docName);
+    return document;
+}
+

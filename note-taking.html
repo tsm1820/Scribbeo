@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' fonts.js 'unsafe-inline' 'unsafe-eval';** ">--> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="popupstyle.css">
+
+    <script type=text/javascript src="note-taking.js"></script>
+    <script type=text/javascript src="fonts.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <!--<link
+        rel="license"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"
+    />-->
+</head>
+
+<body class="note-taking">
+
+    <div id="back">
+        <button id = "backbutton">
+            back
+        </button>
+    </div>
+
+    
+    <div id="documentname">
+        <h3 style="text-align:center;"><span id="docname"></span></h3>
+
+    </div>
+
+    <div id="close">
+        <!--this is the edit button that can be added to already
+        time-stamped notes to edit them
+        <button><i class="fas fa-edit"></i></button>
+        -->
+        <button><i class="far fa-window-close fa-lg" id="closebutton"></i></button>
+    </div>
+
+    <div id="add">
+        <button><i class="far fa-plus-square fa-lg" id="addbutton"></i></button>
+    </div>
+
+    <div id="noteboxhead">
+        
+        <textarea id="notebox" rows="10" cols="30"></textarea>
+
+        <input id="submit" src="images/submit-button.png" alt="submit-note" type="image">
+    </div>
+
+
+    <div id="alldocs">
+        <h2 id="documents"></h2>
+    </div>
+ 
+
+</body>
+
+</html>

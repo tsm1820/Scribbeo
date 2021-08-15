@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="popupstyle.css">
+
+        <script type=text/javascript src="usersdocs.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+        
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+
+    </head>
+    
+    <body class="usersdocs">
+
+        <div id="blackbackground">
+        </div>
+        
+        <div id="sign-out">
+            <button id = "signout" class = "signoutbutton">
+                signout
+            </button>
+        </div>
+
+        <div id="signoutconfirm">
+            <!-- Modal content -->
+            <div id="signoutcontent" class="modal-content">
+              <p>Are you sure you want to sign out?</p>
+
+        
+            <button id="yesoutbutton">
+                yes
+            </button>
+            <button id="nooutbutton">
+                no
+            </button>
+            </div>
+          
+        </div>
+
+        <div id="back">
+            <button id = "backbutton">
+                back
+            </button>
+        </div>
+
+        <div id="heading">
+            <h3 style="text-align:center;">all documents</h3>
+            
+        </div> 
+
+        <div id="searchdiv">
+            <input id="searchbar" type="text" placeholder="search for notes">
+        </div>
+
+        <div id="columnsdivision">
+            <div id="columns" class="grid-container"></div>
+        </div>
+
+    </body>
+
+</html>

@@ -1,44 +1,875 @@
 body {
-    background-color: #DCF3E9;
+   /* background-color: #DCF3E9; */
+   background-color: #2C2E43;
     height: 535px;
     width: 400px;
+    background-size: cover;
+    
 }
 
+.popup {
+    background-image: url(images/popup-home.gif);
+    background-size: cover;
+}
+
+
 .popup #heading {
-    font-family: Montserrat;
+    font-family: 'Poppins', sans-serif;
+    top: 290px;
     font-style: normal;
     font-weight: bold;
-    font-size: 33px;
+    font-size: 35px;
     line-height: 40px;
     text-align: center; 
-    top: 200px;
     position: relative;
 }
 
 .popup button { 
     position: relative;
-    top: 270px;
+    top: 290px;
     background-color: #108B7F;
     border: none;
     border-radius: 50px 50px 50px 50px;
+    border-style: dashed;
+    border-color:#0e5c55;
     width: 337px;
     height: 67px;
     left: 35px;
     
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
     font-style: normal;
-    font-weight: bold;
     font-size: 25px;
     line-height: 30px;
     text-align: center;
     color: #FBF7F8;
-
 }
+
 
 .popup button:hover {
     background-color:  #0e5c55;
     cursor: pointer;
 }
 
+.signedin {
+    background-image: url(images/popup-signedin-bg-new.png);
+}
+
+.signedin #blackbackground {
+    background-color: black;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    height: 550px;
+    width: 420px;
+    margin: 0;
+    z-index: 5;
+    opacity: 40%;
+    display: none;
+}
+
+.signedin #greeting {
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: 25px;
+    line-height: normal;
+    top: 40px;
+    left: 20px;
+    position: relative;
+}
+
+.signedin #greetingName {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 23px;
+    line-height: normal;
+    left: 20px;
+    top: 45px;
+    position: relative;
+}
+
+.signedin #settings {
+    width: 60px;
+    height: auto;
+    float: right;
+    right: 20px;
+    top: 40px;
+    position: relative;
+    z-index: 1;
+    transition: 0.5s;
+    transform: rotate(0deg);
+}
+
+.signedin #settings:hover {
+    cursor: pointer;
+}    
+
+.signedin #settings:active {
+    cursor: pointer;
+    transform: rotate(90deg);
+    transition: 0.5s;
+}
+
+.signedin #settingslider{
+    display: none;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 78%;
+    bottom: 0;
+    background-color: #cc8e6e;
+    transition: all 1s;
+    z-index: 1;
+}
+
+.signedin #settingslider #sign-out {
+    z-index: 100;
+    background-color: red;
+}    
+
+.signedin #searchbar {
+    background: url(images/search-icon.png) no-repeat 7px 10px;
+    background-size: 5%;
+    padding-left: 30px;
+    width: 200px;
+    height: 35px;
+    background-color: #f3cab7;
+    outline: 0;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    box-shadow: none;
+    border: 1px solid;
+    border-color: #e9b398;
+    border-radius: 10px;
+    left: 15px;
+    top: 70px;
+    position: relative;
+    z-index: 0;
+}
+
+
+
+.signedin button:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background-color: red;
+}
+
+.signedin .file-img  {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.signedin .file-img img {
+    height: 125px;
+    width: auto;
+    font-size: 10%;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.signedin #submit {
+    display: none;
+}
+
+.signedin #titlename {
+    display: none;
+}
+
+.signedin #newname {
+    display: none;
+}
+
+.signedin #createdocbutton {
+    background: url(images/add-sign.png) no-repeat 7px 17px;
+    background-size: 15%;
+    padding-left: 30px;
+    background-color: #4cac94;
+    top: 335px;
+    left: 25px;
+    position: fixed;
+    width: 160px;
+    height: 60px;
+
+    border-radius: 15px;
+    border: 2px;
+    border-color: #202827;
+
+    border-style: dashed;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    box-shadow: none;
+}
+
+.signedin #signoutbutton {
+    
+    background-color: #e8a06e;
+    top: 450px;
+    left: 230px;
+    height: 50px;
+    width: 110px;
+    position: fixed;
+    
+    border-radius: 15px;
+    border: 2px;
+    border-color: #202827;
+
+    border-style: dashed;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    box-shadow: none;
+}
+
+
+.signedin #createdocbutton:hover  {
+    border-style:solid;
+}
+
+.signedin #signoutbutton:hover {
+    border-style:solid;
+}
+
+
+.signedin .signoutbutton button:hover {
+    background-color:   #108B7F;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.signedin #newdoctitle {
+    white-space: pre-wrap;
+}
+
+.signedin #newdocmodal {
+    display: none;
+    position: fixed; /* Stay in place */
+    left: 55px;
+    top: 200px;
+    width: 300px; /* Full width */
+    height: 120px; /* Full height */
+    background-color: #0e7e73;
+    border-radius: 20px 20px 20px 20px;
+    z-index: 6;
+}
+
+.signedin #newdoccontent {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    left: 110px;
+    top: 195px;
+    width: 300px; /* Full width */
+    height: 150px; /* Full height */
+    color: #DCF3E9;
+}
+
+.signedin #newdocsubmit {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #d7e8ba;
+    color: #272727;
+    top: 283px;
+    left: 120px;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #closenewdocmodal {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #ac0743;
+    color: #eeeeee;
+    top: 283px;
+    left: 210px;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #guidebook {
+    display: none;
+    position: fixed; /* Stay in place */
+    left: 23px;
+    top: 50px;
+    width: 375px; /* Full width */
+    height: 460px; /* Full height */
+    background-color: #b7eecf;
+    border-radius: 20px 20px 20px 20px;
+    z-index: 6;
+}
+
+.signedin #guidebookcontent {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    left: 60px;
+    top: 50px;
+    width: 300px; /* Full width */
+    height: 150px; /* Full height */
+    color: #2c2c2c;
+}
+
+.signedin #closeguidebutton {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #ac0743;
+    color: #DCF3E9;
+    top: 465px;
+    left: 175px;
+    width: 55px;
+    height: 35px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #signoutconfirm {
+    display: none;
+    position: fixed; /* Stay in place */
+    left: 55px;
+    top: 250px;
+    width: 300px; /* Full width */
+    height: 120px; /* Full height */
+    background-color: #b7eecf;
+    border-radius: 20px 20px 20px 20px;
+    z-index: 5;
+}
+
+.signedin #signoutcontent {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    left: 75px;
+    top: 265px;
+    width: 300px; /* Full width */
+    height: 150px; /* Full height */
+    color: #0d1b15;
+}
+
+.signedin #yesoutbutton {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #d7e8ba;
+    color: #272727;
+    left: 150px;
+    width: 50px;
+    height: 35px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #nooutbutton {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #ac0743;
+    color: #DCF3E9;
+    left: 220px;
+    width: 50px;
+    height: 35px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #mode {
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: 12px;
+    line-height: normal;
+    top: 140px;
+    left: 20px;
+    position: fixed;
+}
+
+.signedin #dark button{
+    position: fixed;
+    background-color: #d7e8ba;
+    color: #272727;
+    top: 150px;
+    left: 250px;
+    width: 50px;
+    height: 35px;
+    border-radius: 3px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.signedin #light button{
+    position: fixed;
+    background-color: #d7e8ba;
+    color: #272727;
+    top: 150px;
+    right: 50px;
+    bottom:150px;
+    width: 50px;
+    height: 35px;
+    border-radius: 3px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.note-taking {
+    background-image: url(images/blue-background.png);
+    background-size: cover;
+}
+
+.note-taking #close button{
+    position: fixed;
+    background-color:  #77beb7;
+    color: white;
+    top: 40px;
+    right: 60px;
+    bottom:150px;
+    width: 30px;
+    height: 22px;
+    border-radius: 3px;
+    border-color: transparent;
+    border-style: solid;
+
+}
+
+.note-taking #add button{
+   
+
+    position: fixed;
+    background-color:  #77beb7;
+    color: white;
+    top: 40px;
+    left: 290px;
+    width: 30px;
+    height: 22px;
+    border-radius: 3px;
+    border-color: transparent;
+    border-style: solid;
+}
+
+
+.note-taking .doc {
+    border-color: transparent;
+    background-color: transparent;
+    position:relative;
+    left : 330px; 
+    top:-30px;
+    
+}
+
+.note-taking #submit {
+    top: 165px;
+    right: 70px;
+}
+
+
+.note-taking #backbutton {    
+    top: 15px;
+    position: fixed;
+    background-color: #85c9ce;
+    border-radius: 50px 50px 50px 50px;
+    width: 100px;
+    left: 20px;
+    
+    font-family: 'Montserrat', sans-serif;
+    font-style: lighter;
+    font-size: 15px;
+    color: black;
+    
+    line-height: 30px;
+    text-align: center;
+    
+    border-color: #202827;
+    border-style: dashed;
+    box-shadow: none;
+    z-index: 1;
+ }
+
+ .note-taking #backbutton:hover {
+     border-style: solid;
+ }
+
+
+
+
+
+.signedin .grid-container {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    grid-gap: 15px 10px;
+    padding: 10px;
+    size: 10%;
+}
+        
+.signedin #oldnotesbutton {
+    
+    border-radius: 20px;
+    background: url(images/all-notes.png) no-repeat 0px 0px;
+    background-size: 101%;
+    padding-top: 145px;
+    background-color: rgb(238, 255, 250);
+    top: 130px;
+    left: 25px;
+    position: fixed;
+    width: 160px;
+    height: 190px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 15px;
+    border-style: dashed;
+    border-color: black;
+}
+
+.signedin #oldnotesbutton:hover {
+    border-style: solid;
+}
+
+.signedin #guidebutton {
+    
+    background: url(images/pattern-background.png) no-repeat 0px 0px;
+    background-size: 101%;
+    background-color: #b8e2d6;
+
+
+    top: 450px;
+    left: 80px;
+    height: 50px;
+    width: 121px;
+    position: fixed;
+
+    border-radius: 15px;
+    border: 2px;
+    border-color: #202827;
+
+    border-style: dashed;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    box-shadow: none;
+}
+
+.signedin #guidebutton:hover {
+    cursor: pointer;
+    border-style:solid;
+}
+
+.signedin .addnewnotes  .helpguide {
+    width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+
+
+
+.signedin #column {
+    display: flex;
+    flex: 50%;
+    padding: 10px;
+}
+
+.signedin .row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.note-taking #documentname {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.note-taking #notebox {
+    width: 330px;
+    border-radius: 5px;
+    border-color: #0e5c55;
+    /*background: rgba(207, 211, 220, 0.25);*/
+    background: #D5E3E5;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    box-shadow: none;
+    border: 1px solid;
+    outline: none;
+    left:40px;
+    top: 20px;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.note-taking button:hover {
+    background-color: #108B7F;
+    cursor: pointer;
+}
+
+.note-taking .adddoc input[type = image] {
+    position: absolute;
+    bottom: 50;
+    width: 10%;
+    height: auto;
+    
+    float: right;
+    padding-left: 30px;
+}
+.note-taking input[type = image] {
+    position: absolute;
+    top: 50;
+    width: 10%;
+    height: auto;
+    float: right;
+    padding-left: 30px;
+}
+
+.note-taking input[type = image]:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.note-taking .headerid {
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    text-align: center;
+    width: 300px;
+    
+    height: auto;
+    border-radius: 6px;
+    
+    /*background: rgba(94, 163, 148, 0.25);*/
+    background:#629e9e;
+    color: black;
+    font-size: 15px;
+    margin: top right bottom left; 
+    margin: 10px 10px 10px 50px;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    
+    display: block;
+    word-wrap: break-word;
+ }
+
+ .note-taking #notesHeaders {
+    height: 280px;
+    padding: 10px;
+    width: auto;
+    top: 8px;
+    background: transparent;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+    overflow: scroll;
+ }
+
+.usersdocs {
+    background-image: url(images/blue-background.png);
+    background-size: cover;
+}
+
+
+.usersdocs #blackbackground {
+    background-color: black;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    height: 560px;
+    width: 420px;
+    margin: 0;
+    z-index: 4;
+    opacity: 40%;
+    display: none;
+}
+
+.usersdocs #columnsdivision {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 410px;
+    position: relative;
+    top: 140px;
+}
+
+
+.usersdocs #heading {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 25px;
+    line-height: 40px;
+    top: 30px;
+    left: 100px;
+    position: fixed;
+    overflow: hidden;
+ }
+.usersdocs #searchbar {
+    background: url(images/search-icon.png) no-repeat 7px 10px;
+    background-size: 5%;
+    padding-left: 30px;
+    width: 330px;
+    height: 35px;
+    background-color: #97caca;
+    outline: 0;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    box-shadow: none;
+    border: 1px solid;
+    border-color: #2c3741;
+    border-radius: 10px;
+    left: 23px;
+    top: 105px;
+    position: fixed;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+ .usersdocs #backbutton {    
+    top: 15px;
+    position: fixed;
+    background-color: #85c9ce;
+    border-radius: 50px 50px 50px 50px;
+    width: 100px;
+    left: 20px;
+    
+    font-family: 'Montserrat', sans-serif;
+    font-style: lighter;
+    font-size: 15px;
+    color: black;
+    
+    line-height: 30px;
+    text-align: center;
+    
+    border-color: #202827;
+    border-style: dashed;
+    box-shadow: none;
+    z-index: 1;
+ }
+
+ .usersdocs #backbutton:hover {
+     border-style: solid;
+ }
+
+ .usersdocs #signout {    
+    top: 15px;
+    position: fixed;
+    background-color: #e8a06e;
+    border-radius: 50px 50px 50px 50px;
+    width: 100px;
+    right: 10px;
+    
+    font-family: 'Montserrat', sans-serif;
+    font-style: lighter;
+    font-size: 15px;
+    color: black;
+    
+    line-height: 30px;
+    text-align: center;
+    
+    border-color: #202827;
+    border-style: dashed;
+    box-shadow: none;
+    z-index: 1;
+ }
+
+ .usersdocs #signout:hover {
+    border-style: solid;
+ }
+
+ .usersdocs #signoutconfirm {
+    display: none;
+    position: fixed; /* Stay in place */
+    left: 55px;
+    top: 250px;
+    width: 300px; /* Full width */
+    height: 120px; /* Full height */
+    background-color: #b7eecf;
+    border-radius: 20px 20px 20px 20px;
+    z-index: 5;
+}
+
+.usersdocs #signoutcontent {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    left: 75px;
+    top: 265px;
+    width: 300px; /* Full width */
+    height: 150px; /* Full height */
+    color: black;
+}
+
+.usersdocs #yesoutbutton {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #d7e8ba;
+    color: #272727;
+    left: 150px;
+    width: 50px;
+    height: 35px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+.usersdocs #nooutbutton {
+    position: fixed; /* Stay in place */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: #ac0743;
+    color: #DCF3E9;
+    left: 220px;
+    width: 50px;
+    height: 35px;
+    border-radius: 5px;
+    border-color: #272727;
+    border-style: solid;
+}
+
+ .usersdocs button:hover {
+    background-color: #108B7F;
+    cursor: pointer;
+}
+
+
+
+ .usersdocs .grid-container {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    grid-gap: 15px 10px;
+    padding: 10px;
+    size: 10%;
+}
+
+
+.usersdocs #fileButton {
+    width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+
+ .usersdocs #documentName {
+    text-align: center;
+    display: block;
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: 15px;
+    
+}

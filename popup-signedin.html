@@ -2,37 +2,139 @@
 <html lang="en">
     <head>
         <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         
         <link rel="stylesheet" href="popupstyle.css">
 
         <script type=text/javascript src="popup-signedin.js"></script>
 
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+        
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+
+        
+
+
     </head>
     
     <body class="signedin">
 
+        <div id="blackbackground">
+        </div>
+
         <div id="heading">
-            <h3 style="text-align:center;">good afternoon, alice</h3>
-            
+            <div id="greeting">
+                good <span id="currentTime"></span>,
+            </div>
+            <div id="greetingName">
+                <span id="name"></span>
+            </div>
         </div> 
 
+
+        <div id="createdoc">
+            <button id="createdocbutton">
+                create document
+            </button>
+        </div>
+
+           
+
         <div id="sign-out">
-            <button class = "signoutbutton">
+            <button id="signoutbutton" class = "signoutbutton">
                 signout
             </button>
         </div>
 
-        <div id="status">
-            <button class = "button">
-                status
+        <div id="signoutconfirm">
+            <!-- Modal content -->
+            <div id="signoutcontent" class="modal-content">
+              <p>Are you sure you want to sign out?</p>
+
+        
+            <button id="yesoutbutton">
+                yes
             </button>
+            <button id="nooutbutton">
+                no
+            </button>
+            </div>
+          
         </div>
 
-        <div id="footer">
-            <footer>
-                hello
-            </footer>
+
+        <div id="columns" class="grid-container">
+
+            <div id="oldnotes">
+                <button id="oldnotesbutton" class="file-img">
+                    all notes
+                    
+                </button>
+            </div>
+
+            <div id="helpguide">
+                <button id="guidebutton" class="file-img">
+                    how to use
+                </button>
+            </div>
+        </div>
+
+        <div id="newdocname">
+            <h4 id="titlename">Give a title to your notes:</h4>
+            <textarea id="newname" rows="1" cols="20"></textarea>
+            <input id="submit" type="submit">
+        </div>
+
+        <div id=newdocmodal>
+            <div id="newdoccontent">
+                <h4 id="newdoc">Give a title to your notes:</h4>
+                <textarea id="newdoctitle" rows="1" cols="20"></textarea>
+                <input id="newdocsubmit" type="submit">
+                <button id="closenewdocmodal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        <div id="guidebook">
+            <!-- Modal content -->
+            <div id="guidebookcontent" class="modal-content">
+                <h4>IMPORTANT NOTE : Please do not open/use Scribbeo on a Chrome 'new tab' ie the 
+                    Chrome welcome page without any url, or on the Chrome extensions page. Doing so 
+                    would result in errors.</h4>
+              <p>Guide to using Scribbeo: </p>
+                  <ol>
+                      <li> Scribbeo only works on a page that is running a YouTube video</li>
+                      <li>  Open a YouTube video on the current tab (not YouTube's home page)</li>
+                      <li>Click on the 'add new notes' button in the home page</li>
+                      <li>Add a title to your notes</li>
+                      <li>While the video is playing, type any note and click the 'arrow' button</li>
+                      <li>The note you have just typed will appear below</li>
+                      <li>Click on the note if you want to review the part of the video</li>
+                  <ol>
+                
+
+               
+                <button id="closeguidebutton">
+                    close
+                </button>
+            </div>
+          
         </div>
 
     </body>
